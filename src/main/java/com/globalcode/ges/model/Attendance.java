@@ -1,10 +1,11 @@
 package com.globalcode.ges.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 /**
  * Attendance entity representing student attendance in class sessions
+ * Using modern Java 21 features and java.time API
  */
 @Entity
 @Table(name = "attendances")
@@ -21,13 +22,11 @@ public class Attendance extends BaseEntity {
     @Column(name = "present", nullable = false)
     private Boolean present = false;
     
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "check_in_time")
-    private Date checkInTime;
+    private LocalDateTime checkInTime;
     
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "check_out_time")
-    private Date checkOutTime;
+    private LocalDateTime checkOutTime;
     
     @Column(name = "notes", length = 300)
     private String notes;
@@ -48,7 +47,7 @@ public class Attendance extends BaseEntity {
         this.classSession = classSession;
         this.present = present;
         if (present) {
-            this.checkInTime = new Date();
+            this.checkInTime = LocalDateTime.now();
         }
     }
     
@@ -61,19 +60,19 @@ public class Attendance extends BaseEntity {
         this.present = present;
     }
     
-    public Date getCheckInTime() {
+    public LocalDateTime getCheckInTime() {
         return checkInTime;
     }
     
-    public void setCheckInTime(Date checkInTime) {
+    public void setCheckInTime(LocalDateTime checkInTime) {
         this.checkInTime = checkInTime;
     }
     
-    public Date getCheckOutTime() {
+    public LocalDateTime getCheckOutTime() {
         return checkOutTime;
     }
     
-    public void setCheckOutTime(Date checkOutTime) {
+    public void setCheckOutTime(LocalDateTime checkOutTime) {
         this.checkOutTime = checkOutTime;
     }
     

@@ -17,7 +17,7 @@ import jakarta.persistence.*;
     @NamedQuery(name = "Member.findByName", 
                 query = "SELECT m FROM Member m WHERE m.name LIKE :name ORDER BY m.name")
 })
-public class Member extends BaseEntity {
+public final class Member extends BaseEntity implements Auditable {
     
     @Column(name = "name", nullable = false, length = 100)
     private String name;

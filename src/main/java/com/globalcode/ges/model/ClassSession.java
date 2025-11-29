@@ -1,7 +1,7 @@
 package com.globalcode.ges.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import jakarta.persistence.*;
 
@@ -26,9 +26,8 @@ public class ClassSession extends BaseEntity {
     @Column(name = "description", length = 500)
     private String description;
     
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "session_date", nullable = false)
-    private Date sessionDate;
+    private LocalDateTime sessionDate;
     
     @Column(name = "duration_minutes")
     private Integer durationMinutes;
@@ -47,7 +46,7 @@ public class ClassSession extends BaseEntity {
     // Constructors
     public ClassSession() {}
     
-    public ClassSession(String title, Date sessionDate, ClassGroup classGroup) {
+    public ClassSession(String title, LocalDateTime sessionDate, ClassGroup classGroup) {
         this.title = title;
         this.sessionDate = sessionDate;
         this.classGroup = classGroup;
@@ -70,11 +69,11 @@ public class ClassSession extends BaseEntity {
         this.description = description;
     }
     
-    public Date getSessionDate() {
+    public LocalDateTime getSessionDate() {
         return sessionDate;
     }
     
-    public void setSessionDate(Date sessionDate) {
+    public void setSessionDate(LocalDateTime sessionDate) {
         this.sessionDate = sessionDate;
     }
     

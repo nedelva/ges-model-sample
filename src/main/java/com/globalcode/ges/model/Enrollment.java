@@ -1,7 +1,7 @@
 package com.globalcode.ges.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 /**
@@ -21,9 +21,8 @@ import jakarta.persistence.*;
 })
 public class Enrollment extends BaseEntity {
     
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "enrollment_date", nullable = false)
-    private Date enrollmentDate;
+    private LocalDateTime enrollmentDate;
     
     @Column(name = "amount_paid", precision = 10, scale = 2)
     private BigDecimal amountPaid;
@@ -48,7 +47,7 @@ public class Enrollment extends BaseEntity {
     
     // Constructors
     public Enrollment() {
-        this.enrollmentDate = new Date();
+        this.enrollmentDate = LocalDateTime.now();
     }
     
     public Enrollment(Member member, ClassGroup classGroup) {
@@ -58,11 +57,11 @@ public class Enrollment extends BaseEntity {
     }
     
     // Getters and Setters
-    public Date getEnrollmentDate() {
+    public LocalDateTime getEnrollmentDate() {
         return enrollmentDate;
     }
     
-    public void setEnrollmentDate(Date enrollmentDate) {
+    public void setEnrollmentDate(LocalDateTime enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
     }
     

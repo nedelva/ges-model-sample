@@ -1,11 +1,12 @@
 package com.globalcode.ges.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 /**
  * Base entity class with common fields
+ * Using modern Java 21 features and java.time API
  */
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
@@ -14,23 +15,21 @@ public abstract class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
-    private Date createdDate;
+    private LocalDateTime createdDate;
     
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_date")
-    private Date updatedDate;
+    private LocalDateTime updatedDate;
     
     @PrePersist
     protected void onCreate() {
-        createdDate = new Date();
-        updatedDate = new Date();
+        createdDate = LocalDateTime.now();
+        updatedDate = LocalDateTime.now();
     }
     
     @PreUpdate
     protected void onUpdate() {
-        updatedDate = new Date();
+        updatedDate = LocalDateTime.now();
     }
     
     // Getters and Setters
@@ -42,19 +41,19 @@ public abstract class BaseEntity implements Serializable {
         this.id = id;
     }
     
-    public Date getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
     
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
     
-    public Date getUpdatedDate() {
+    public LocalDateTime getUpdatedDate() {
         return updatedDate;
     }
     
-    public void setUpdatedDate(Date updatedDate) {
+    public void setUpdatedDate(LocalDateTime updatedDate) {
         this.updatedDate = updatedDate;
     }
 }

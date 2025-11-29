@@ -1,12 +1,13 @@
 package com.globalcode.ges.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import jakarta.persistence.*;
 
 /**
  * ClassGroup entity representing course classes (equivalent to Turma)
+ * Using modern Java 21 features and java.time API
  */
 @Entity
 @Table(name = "class_groups")
@@ -20,7 +21,7 @@ import jakarta.persistence.*;
     @NamedQuery(name = "ClassGroup.findByDateRange", 
                 query = "SELECT cg FROM ClassGroup cg WHERE cg.startDate >= :startDate AND cg.endDate <= :endDate")
 })
-public class ClassGroup extends BaseEntity {
+public final class ClassGroup extends BaseEntity implements Auditable {
     
     @Column(name = "name", nullable = false, length = 100)
     private String name;
@@ -28,13 +29,11 @@ public class ClassGroup extends BaseEntity {
     @Column(name = "description", length = 300)
     private String description;
     
-    @Temporal(TemporalType.DATE)
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDate startDate;
     
-    @Temporal(TemporalType.DATE)
     @Column(name = "end_date")
-    private Date endDate;
+    private LocalDate endDate;
     
     @Column(name = "max_students")
     private Integer maxStudents;
@@ -64,7 +63,7 @@ public class ClassGroup extends BaseEntity {
     // Constructors
     public ClassGroup() {}
     
-    public ClassGroup(String name, Course course, Date startDate, Date endDate) {
+    public ClassGroup(String name, Course course, LocalDate startDate, LocalDate endDate) {
         this.name = name;
         this.course = course;
         this.startDate = startDate;
@@ -88,19 +87,19 @@ public class ClassGroup extends BaseEntity {
         this.description = description;
     }
     
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
     
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
     
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
     
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
     

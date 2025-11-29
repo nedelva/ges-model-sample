@@ -15,7 +15,7 @@ import jakarta.persistence.*;
     @NamedQuery(name = "Location.findByState", 
                 query = "SELECT l FROM Location l WHERE l.address.state = :state")
 })
-public class Location extends BaseEntity {
+public final class Location extends BaseEntity implements Auditable {
     
     @Column(name = "name", nullable = false, length = 100)
     private String name;

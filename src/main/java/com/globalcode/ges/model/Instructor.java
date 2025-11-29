@@ -17,7 +17,7 @@ import jakarta.persistence.*;
     @NamedQuery(name = "Instructor.findByStatus", 
                 query = "SELECT i FROM Instructor i WHERE i.status = :status")
 })
-public class Instructor extends BaseEntity {
+public final class Instructor extends BaseEntity implements Auditable {
     
     @Column(name = "name", nullable = false, length = 100)
     private String name;
