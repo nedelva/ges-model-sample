@@ -2,7 +2,7 @@ package com.globalcode.ges.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * Enrollment entity representing student enrollments in class groups

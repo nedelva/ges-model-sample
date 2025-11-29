@@ -1,7 +1,7 @@
 package com.globalcode.ges.model;
 
 import java.util.Date;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * Attendance entity representing student attendance in class sessions

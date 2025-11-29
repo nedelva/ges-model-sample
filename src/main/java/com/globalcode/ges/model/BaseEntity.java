@@ -2,7 +2,7 @@ package com.globalcode.ges.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * Base entity class with common fields

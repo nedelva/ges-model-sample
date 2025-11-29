@@ -3,7 +3,7 @@ package com.globalcode.ges.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * Course entity representing educational courses
