@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
+             version="3.1">
+    
+    <!-- Minimal persistence.xml for JPA 3.1+ -->
+    <!-- Most configuration is done programmatically via JpaConfig -->
+    <persistence-unit name="ges-model-pu" transaction-type="RESOURCE_LOCAL">
+        
+        <!-- Entity classes are auto-discovered in Jakarta EE / Spring Boot -->
+        <!-- Explicit listing only needed for specific scenarios -->
+        <class>com.globalcode.ges.model.Member</class>
+        <class>com.globalcode.ges.model.Course</class>
+        <class>com.globalcode.ges.model.ClassGroup</class>
+        <class>com.globalcode.ges.model.ClassSession</class>
+        <class>com.globalcode.ges.model.Enrollment</class>
+        <class>com.globalcode.ges.model.Attendance</class>
+        <class>com.globalcode.ges.model.Instructor</class>
+        <class>com.globalcode.ges.model.Location</class>
+        <class>com.globalcode.ges.model.Group</class>
+        
+        <!-- Exclude unlisted classes to prevent auto-scanning issues -->
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        
+        <properties>
+            <!-- Minimal properties - most are set programmatically -->
+            <!-- Connection properties should be provided via JpaConfig or environment -->
+        </properties>
+    </persistence-unit>
+</persistence>

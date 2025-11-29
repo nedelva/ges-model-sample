@@ -11,29 +11,17 @@ import jakarta.persistence.*;
 @Table(name = "locations")
 @NamedQueries({
     @NamedQuery(name = "Location.findByCity", 
-                query = "SELECT l FROM Location l WHERE l.city = :city"),
+                query = "SELECT l FROM Location l WHERE l.address.city = :city"),
     @NamedQuery(name = "Location.findByState", 
-                query = "SELECT l FROM Location l WHERE l.state = :state")
+                query = "SELECT l FROM Location l WHERE l.address.state = :state")
 })
 public class Location extends BaseEntity {
     
     @Column(name = "name", nullable = false, length = 100)
     private String name;
     
-    @Column(name = "address", length = 200)
-    private String address;
-    
-    @Column(name = "city", length = 50)
-    private String city;
-    
-    @Column(name = "state", length = 50)
-    private String state;
-    
-    @Column(name = "country", length = 50)
-    private String country;
-    
-    @Column(name = "postal_code", length = 20)
-    private String postalCode;
+    @Embedded
+    private Address address;
     
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Member> members = new ArrayList<>();
@@ -44,10 +32,14 @@ public class Location extends BaseEntity {
     // Constructors
     public Location() {}
     
+    public Location(String name, Address address) {
+        this.name = name;
+        this.address = address;
+    }
+    
     public Location(String name, String city, String state) {
         this.name = name;
-        this.city = city;
-        this.state = state;
+        this.address = new Address(null, city, state, null, null);
     }
     
     // Getters and Setters
@@ -59,44 +51,12 @@ public class Location extends BaseEntity {
         this.name = name;
     }
     
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
     
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
-    }
-    
-    public String getCity() {
-        return city;
-    }
-    
-    public void setCity(String city) {
-        this.city = city;
-    }
-    
-    public String getState() {
-        return state;
-    }
-    
-    public void setState(String state) {
-        this.state = state;
-    }
-    
-    public String getCountry() {
-        return country;
-    }
-    
-    public void setCountry(String country) {
-        this.country = country;
-    }
-    
-    public String getPostalCode() {
-        return postalCode;
-    }
-    
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
     }
     
     public List<Member> getMembers() {
@@ -120,8 +80,7 @@ public class Location extends BaseEntity {
         return "Location{" +
                 "id=" + getId() +
                 ", name='" + name + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
+                ", address=" + address +
                 '}';
     }
 }

@@ -22,11 +22,8 @@ public class Instructor extends BaseEntity {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
     
-    @Column(name = "email", nullable = false, unique = true, length = 100)
-    private String email;
-    
-    @Column(name = "phone", length = 20)
-    private String phone;
+    @Embedded
+    private ContactInfo contactInfo;
     
     @Column(name = "specialty", length = 100)
     private String specialty;
@@ -46,7 +43,13 @@ public class Instructor extends BaseEntity {
     
     public Instructor(String name, String email, String specialty) {
         this.name = name;
-        this.email = email;
+        this.contactInfo = new ContactInfo(email);
+        this.specialty = specialty;
+    }
+    
+    public Instructor(String name, ContactInfo contactInfo, String specialty) {
+        this.name = name;
+        this.contactInfo = contactInfo;
         this.specialty = specialty;
     }
     
@@ -59,20 +62,21 @@ public class Instructor extends BaseEntity {
         this.name = name;
     }
     
-    public String getEmail() {
-        return email;
+    public ContactInfo getContactInfo() {
+        return contactInfo;
     }
     
-    public void setEmail(String email) {
-        this.email = email;
+    public void setContactInfo(ContactInfo contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+    
+    // Convenience methods for backward compatibility
+    public String getEmail() {
+        return contactInfo != null ? contactInfo.email() : null;
     }
     
     public String getPhone() {
-        return phone;
-    }
-    
-    public void setPhone(String phone) {
-        this.phone = phone;
+        return contactInfo != null ? contactInfo.phone() : null;
     }
     
     public String getSpecialty() {
@@ -112,7 +116,7 @@ public class Instructor extends BaseEntity {
         return "Instructor{" +
                 "id=" + getId() +
                 ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
+                ", contactInfo=" + contactInfo +
                 ", specialty='" + specialty + '\'' +
                 ", status=" + status +
                 '}';

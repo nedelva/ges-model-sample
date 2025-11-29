@@ -10,14 +10,13 @@ import jakarta.persistence.*;
  */
 @Entity
 @Table(name = "courses")
-@NamedQueries({
-    @NamedQuery(name = "Course.findByName", 
-                query = "SELECT c FROM Course c WHERE c.name LIKE :name"),
-    @NamedQuery(name = "Course.findByStatus", 
-                query = "SELECT c FROM Course c WHERE c.status = :status"),
-    @NamedQuery(name = "Course.findByDuration", 
-                query = "SELECT c FROM Course c WHERE c.durationHours = :duration")
-})
+// Using repeatable @NamedQuery annotations (JPA 3.1+ feature)
+@NamedQuery(name = "Course.findByName", 
+            query = "SELECT c FROM Course c WHERE c.name LIKE :name")
+@NamedQuery(name = "Course.findByStatus", 
+            query = "SELECT c FROM Course c WHERE c.status = :status")
+@NamedQuery(name = "Course.findByDuration", 
+            query = "SELECT c FROM Course c WHERE c.durationHours = :duration")
 public class Course extends BaseEntity {
     
     @Column(name = "name", nullable = false, length = 100)

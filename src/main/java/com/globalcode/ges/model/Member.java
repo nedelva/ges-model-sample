@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 @Table(name = "members")
 @NamedQueries({
     @NamedQuery(name = "Member.findByEmail", 
-                query = "SELECT m FROM Member m WHERE m.email = :email"),
+                query = "SELECT m FROM Member m WHERE m.contactInfo.email = :email"),
     @NamedQuery(name = "Member.findByStatus", 
                 query = "SELECT m FROM Member m WHERE m.status = :status"),
     @NamedQuery(name = "Member.findByName", 
@@ -22,11 +22,8 @@ public class Member extends BaseEntity {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
     
-    @Column(name = "email", nullable = false, unique = true, length = 100)
-    private String email;
-    
-    @Column(name = "phone", length = 20)
-    private String phone;
+    @Embedded
+    private ContactInfo contactInfo;
     
     @Column(name = "company", length = 100)
     private String company;
@@ -53,7 +50,12 @@ public class Member extends BaseEntity {
     
     public Member(String name, String email) {
         this.name = name;
-        this.email = email;
+        this.contactInfo = new ContactInfo(email);
+    }
+    
+    public Member(String name, ContactInfo contactInfo) {
+        this.name = name;
+        this.contactInfo = contactInfo;
     }
     
     // Getters and Setters
@@ -65,20 +67,21 @@ public class Member extends BaseEntity {
         this.name = name;
     }
     
-    public String getEmail() {
-        return email;
+    public ContactInfo getContactInfo() {
+        return contactInfo;
     }
     
-    public void setEmail(String email) {
-        this.email = email;
+    public void setContactInfo(ContactInfo contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+    
+    // Convenience methods for backward compatibility
+    public String getEmail() {
+        return contactInfo != null ? contactInfo.email() : null;
     }
     
     public String getPhone() {
-        return phone;
-    }
-    
-    public void setPhone(String phone) {
-        this.phone = phone;
+        return contactInfo != null ? contactInfo.phone() : null;
     }
     
     public String getCompany() {
@@ -134,7 +137,7 @@ public class Member extends BaseEntity {
         return "Member{" +
                 "id=" + getId() +
                 ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
+                ", contactInfo=" + contactInfo +
                 ", status=" + status +
                 '}';
     }
