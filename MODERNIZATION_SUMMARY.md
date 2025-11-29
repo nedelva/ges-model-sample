@@ -4,8 +4,27 @@ This document summarizes the complete modernization journey from a legacy Java 8
 
 ## Modernization Roadmap Completed
 
+### 🏷️ Git Tags for Navigation
+
+Each modernization step has been tagged for easy navigation:
+
+- **`v0.0-legacy-baseline`** - Starting point (Java 8 + JPA 1.0 + JUnit 4)
+- **`v1.0-step1-jakarta-migration`** - After Step 1 (Jakarta namespace)
+- **`v1.0-step2-jpa-modernization`** - After Step 2 (JPA 3.1 + Java 21)
+- **`v1.0-step3-junit5-migration`** - After Step 3 (JUnit 5)
+- **`v1.0-step4-java21-features`** - After Step 4 (Modern Java 21)
+- **`v1.0-complete`** - Final state with documentation
+
+To checkout a specific step:
+```bash
+git checkout v1.0-step1-jakarta-migration
+```
+
+---
+
 ### ✅ Step 1: javax.* → jakarta.* Namespace Migration
-**Commit:** `Step #1: Migrate javax.* to jakarta.* namespace (JPA and Mail APIs)`
+**Commit:** `Step #1: Migrate javax.* to jakarta.* namespace (JPA and Mail APIs)`  
+**Tag:** `v1.0-step1-jakarta-migration`
 
 **Changes:**
 - Migrated `javax.persistence` → `jakarta.persistence` in all 10 entity classes
@@ -20,7 +39,8 @@ This document summarizes the complete modernization journey from a legacy Java 8
 ---
 
 ### ✅ Step 2: JPA 1.0 → JPA 3.1 with Modern Features
-**Commit:** `Step #2: Upgrade to JPA 3.1 with modern features (Java 21, embeddable records, repeatable annotations, programmatic bootstrap)`
+**Commit:** `Step #2: Upgrade to JPA 3.1 with modern features (Java 21, embeddable records, repeatable annotations, programmatic bootstrap)`  
+**Tag:** `v1.0-step2-jpa-modernization`
 
 **Changes:**
 - Upgraded Java from 8 → 21
@@ -46,7 +66,8 @@ This document summarizes the complete modernization journey from a legacy Java 8
 ---
 
 ### ✅ Step 3: JUnit 4 → JUnit 5 with Modern Assertions
-**Commit:** `Step #3: Migrate JUnit 4 to JUnit 5 with modern assertions (AssertJ, parameterized tests, nested tests)`
+**Commit:** `Step #3: Migrate JUnit 4 to JUnit 5 with modern assertions (AssertJ, parameterized tests, nested tests)`  
+**Tag:** `v1.0-step3-junit5-migration`
 
 **Changes:**
 - Migrated from JUnit 4 → JUnit 5 (Jupiter)
@@ -71,7 +92,8 @@ This document summarizes the complete modernization journey from a legacy Java 8
 ---
 
 ### ✅ Step 4: Java 8 → Java 21 with Modern Language Features
-**Commit:** `Step #4: Apply Java 21 modern features (LocalDateTime, sealed interfaces, switch expressions, pattern matching, text blocks)`
+**Commit:** `Step #4: Apply Java 21 modern features (LocalDateTime, sealed interfaces, switch expressions, pattern matching, text blocks)`  
+**Tag:** `v1.0-step4-java21-features`
 
 **Changes:**
 - Replaced `java.util.Date` with modern `java.time` API:
